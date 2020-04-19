@@ -51,4 +51,19 @@ router.get('/students',(request, response) =>{
         response.render('students',{student : students});
     });
 });
+
+router.get('/students/api',(request, response) =>{ 
+    myDb.query('select * from student', (err, result) =>{
+        if(err){
+            console.log("Something went wrong .....");
+        }
+        else{
+            result.forEach(element => {
+                students.push(element);
+            });
+        }
+        console.log(students);
+        response.send(students);
+    });
+});
 module.exports = router;
